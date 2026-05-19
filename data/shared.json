@@ -2,7 +2,7 @@
   "apps": [
     {
       "id": 2,
-      "name": "Salesforce",
+      "name": "Salesforce TEST",
       "label": "",
       "url": "https://crm.atheneos.local",
       "catId": "CRM",
@@ -110,39 +110,39 @@
     {
       "id": "HR",
       "name": "HR",
-      "nameEl": "Ανθρώπινο Δυναμικό",
+      "nameEl": "ÎÎ½Î¸ÏÏÏÎ¹Î½Î¿ ÎÏÎ½Î±Î¼Î¹ÎºÏ",
       "color": "#8764b8"
     },
     {
       "id": "Finance",
       "name": "Finance",
-      "nameEl": "Οικονομικά",
+      "nameEl": "ÎÎ¹ÎºÎ¿Î½Î¿Î¼Î¹ÎºÎ¬",
       "color": "#c43501"
     },
     {
       "id": "IT Tools",
       "name": "IT Tools",
-      "nameEl": "Εργαλεία IT",
+      "nameEl": "ÎÏÎ³Î±Î»ÎµÎ¯Î± IT",
       "color": "#5c2d91"
     },
     {
       "id": "Reporting",
       "name": "Reporting",
-      "nameEl": "Αναφορές",
+      "nameEl": "ÎÎ½Î±ÏÎ¿ÏÎ­Ï",
       "color": "#00b7c3"
     },
     {
       "id": "Comm",
       "name": "Communication",
-      "nameEl": "Επικοινωνία",
+      "nameEl": "ÎÏÎ¹ÎºÎ¿Î¹Î½ÏÎ½Î¯Î±",
       "color": "#464775"
     },
     {
       "id": "Other",
       "name": "Other",
-      "nameEl": "Άλλο",
+      "nameEl": "ÎÎ»Î»Î¿",
       "color": "#8a7f74"
     }
   ],
-  "updatedAt": "2026-05-19T14:37:21.888Z"
+  "updatedAt": "2026-05-19T14:38:01.523Z"
 }
