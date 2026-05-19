@@ -102,12 +102,6 @@
   ],
   "cats": [
     {
-      "id": "ERP",
-      "name": "ERP",
-      "nameEl": "ERP",
-      "color": "#107c10"
-    },
-    {
       "id": "CRM",
       "name": "CRM",
       "nameEl": "CRM",
@@ -150,5 +144,5 @@
       "color": "#8a7f74"
     }
   ],
-  "updatedAt": "2026-05-19T14:37:17.801Z"
+  "updatedAt": "2026-05-19T14:37:21.888Z"
 }
