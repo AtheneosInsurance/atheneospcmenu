@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Atheneos Portal</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f3f3f3;color:#202020;font-size:20px;min-height:100vh}
+input,select,textarea{font-family:inherit}
+</style></head><body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+<script>
+const LOGO="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";
+const {useState,useEffect,useRef,useCallback}=React;
+
+// ─── i18n ──────────────────────────────────────────────────────────────────
+const TR={
+  en:{
+    appPortal:'Application Portal',
+    search:'Search...', favourites:'Favourites', admin:'Admin',
+    myFavs:'My Favourites', back:'Back', saved:'✓ Saved',
+    lastUpdated:'Last updated:', apps:'applications',
+    noApps:'No applications found.',
+    adminApps:'Applications', adminCats:'Categories',
+    addApp:'+ Add Application', addCat:'+ Add Category',
+    editApp:'Edit', delete:'Delete', cancel:'Cancel', save:'Save',
+    newApp:'New Application', newCat:'New Category',
+    appName:'App name (system)', label:'Card label (optional)',
+    labelTip:'Leave blank to show the system name on the card.',
+    url:'URL', desc:'Description', category:'Category', color:'Button colour',
+    preview:'Preview', changesNote:'Changes apply immediately for all users.',
+    restricted:'Admin panel — restricted access',
+    catName:'Category name', catNameEl:'Greek name', catColor:'Colour',
+    catUsed:'Used by', catApps:'apps',
+    confirmDelCat:'Delete category? Apps in it will move to "Other".',
+    confirmDelApp:'Delete this application?',
+    pinned:'Pinned', available:'Available', remove:'Remove', add:'Add',
+    reorder:'Drag to reorder',
+    all:'All',
+  },
+  el:{
+    appPortal:'Πύλη Εφαρμογών',
+    search:'Αναζήτηση...', favourites:'Αγαπημένα', admin:'Διαχείριση',
+    myFavs:'Τα Αγαπημένα μου', back:'Πίσω', saved:'✓ Αποθηκεύτηκε',
+    lastUpdated:'Τελ. ενημέρωση:', apps:'εφαρμογές',
+    noApps:'Δεν βρέθηκαν εφαρμογές.',
+    adminApps:'Εφαρμογές', adminCats:'Κατηγορίες',
+    addApp:'+ Προσθήκη Εφαρμογής', addCat:'+ Προσθήκη Κατηγορίας',
+    editApp:'Επεξ.', delete:'Διαγραφή', cancel:'Ακύρωση', save:'Αποθήκευση',
+    newApp:'Νέα Εφαρμογή', newCat:'Νέα Κατηγορία',
+    appName:'Όνομα εφαρμογής', label:'Ετικέτα κάρτας (προαιρετικό)',
+    labelTip:'Αφήστε κενό για εμφάνιση ονόματος συστήματος.',
+    url:'Διεύθυνση URL', desc:'Περιγραφή', category:'Κατηγορία', color:'Χρώμα κουμπιού',
+    preview:'Προεπισκόπηση', changesNote:'Οι αλλαγές εφαρμόζονται αμέσως.',
+    restricted:'Πίνακας διαχείρισης — περιορισμένη πρόσβαση',
+    catName:'Όνομα κατηγορίας', catNameEl:'Ελληνικό όνομα', catColor:'Χρώμα',
+    catUsed:'Χρησιμοποιείται από', catApps:'εφαρμογές',
+    confirmDelCat:'Διαγραφή κατηγορίας; Οι εφαρμογές θα μεταφερθούν στο "Άλλο".',
+    confirmDelApp:'Διαγραφή αυτής της εφαρμογής;',
+    pinned:'Καρφιτσωμένα', available:'Διαθέσιμα', remove:'Αφαίρεση', add:'Προσθήκη',
+    reorder:'Σύρετε για αναδιάταξη',
+    all:'Όλα',
+  }
+};
+
+// ─── Default data ───────────────────────────────────────────────────────────
+const INIT_CATS=[
+  {id:'ERP',      name:'ERP',           nameEl:'ERP',              color:'#107c10'},
+  {id:'CRM',      name:'CRM',           nameEl:'CRM',              color:'#0078d4'},
+  {id:'HR',       name:'HR',            nameEl:'Ανθρώπινο Δυναμικό',color:'#8764b8'},
+  {id:'Finance',  name:'Finance',       nameEl:'Οικονομικά',       color:'#c43501'},
+  {id:'IT Tools', name:'IT Tools',      nameEl:'Εργαλεία IT',      color:'#5c2d91'},
+  {id:'Reporting',name:'Reporting',     nameEl:'Αναφορές',         color:'#00b7c3'},
+  {id:'Comm',     name:'Communication', nameEl:'Επικοινωνία',      color:'#464775'},
+  {id:'Other',    name:'Other',         nameEl:'Άλλο',             color:'#8a7f74'},
+];
+
+const INIT_APPS=[
+  {id:1, name:'SAP ERP',        label:'', url:'https://erp.atheneos.local',     catId:'ERP',       color:'#107c10', desc:'Enterprise resource planning'},
+  {id:2, name:'Salesforce',     label:'', url:'https://crm.atheneos.local',     catId:'CRM',       color:'#0078d4', desc:'Customer relationship'},
+  {id:3, name:'Workday',        label:'', url:'https://hr.atheneos.local',      catId:'HR',        color:'#8764b8', desc:'HR & payroll'},
+  {id:4, name:'Power BI',       label:'', url:'https://bi.atheneos.local',      catId:'Reporting', color:'#00b7c3', desc:'Business intelligence'},
+  {id:5, name:'ServiceNow',     label:'', url:'https://itsm.atheneos.local',    catId:'IT Tools',  color:'#5c2d91', desc:'IT service management'},
+  {id:6, name:'Teams',          label:'', url:'https://teams.microsoft.com',    catId:'Comm',      color:'#464775', desc:'Video & messaging'},
+  {id:7, name:'SharePoint',     label:'', url:'https://sp.atheneos.local',      catId:'IT Tools',  color:'#036c70', desc:'Document management'},
+  {id:8, name:'Concur',         label:'', url:'https://concur.atheneos.local',  catId:'Finance',   color:'#c43501', desc:'Travel & expenses'},
+  {id:9, name:'Claims Portal',  label:'', url:'https://claims.atheneos.local',  catId:'Other',     color:'#8a7f74', desc:'Claims management'},
+  {id:10,name:'HR Portal',      label:'', url:'https://hrportal.atheneos.local',catId:'HR',        color:'#8764b8', desc:'Self-service HR'},
+  {id:11,name:'Finance Reports',label:'', url:'https://finance.atheneos.local', catId:'Finance',   color:'#c43501', desc:'Financial reporting'},
+  {id:12,name:'Outlook Web',    label:'', url:'https://mail.atheneos.local',    catId:'Comm',      color:'#0078d4', desc:'Webmail'},
+];
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+function dName(app){return app.label||app.name;}
+function ini(app){return dName(app).split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+function catName(cats,id,lang='en'){const c=cats.find(x=>x.id===id);if(!c)return id;return lang==='el'&&c.nameEl?c.nameEl:c.name;}
+function catColor(cats,id){const c=cats.find(x=>x.id===id);return c?c.color:'#8a7f74';}
+
+// ─── Tiny components ────────────────────────────────────────────────────────
+function Logo({lang}){
+  return React.createElement('div',{style:{display:'flex',alignItems:'center',gap:15}},
+    React.createElement('img',{src:'data:image/jpeg;base64,'+LOGO,
+      style:{height:54,width:'auto',objectFit:'contain'},alt:'Atheneos'}),
+    React.createElement('div',{style:{width:2,height:42,background:'#d0c8c0'}}),
+    React.createElement('div',{style:{fontSize:15,color:'#8a7f74',lineHeight:1.5,fontWeight:500}},TR[lang].appPortal)
+  );
+}
+
+function LangToggle({lang,setLang}){
+  return React.createElement('div',{style:{display:'flex',border:'2px solid #d0d0d0',borderRadius:3,overflow:'hidden'}},
+    ['en','el'].map(l=>React.createElement('button',{key:l,onClick:()=>setLang(l),
+      style:{padding:'4px 12px',background:l===lang?'#4a4340':'transparent',
+        color:l===lang?'#fff':'#605e5c',border:'none',cursor:'pointer',
+        fontSize:16,fontWeight:l===lang?600:400}},l==='en'?'EN':'ΕΛ'))
+  );
+}
+
+function Swatch({color,size=14}){
+  return React.createElement('span',{style:{display:'inline-block',width:size,height:size,
+    borderRadius:4,background:color,border:'2px solid rgba(0,0,0,0.15)',flexShrink:0}});
+}
+
+function AppTile({app,cats,isFav,onFavToggle,compact,lang="en"}){
+  const col=app.color||catColor(cats,app.catId);
+  return React.createElement('div',{
+    style:{background:'#fff',border:'2px solid #e0e0e0',borderRadius:6,
+      padding:compact?'10px 8px':'16px 10px',cursor:'pointer',
+      display:'flex',flexDirection:'column',alignItems:'center',gap:6,
+      position:'relative',transition:'box-shadow 0.1s',minWidth:0},
+    onMouseEnter:e=>{e.currentTarget.style.boxShadow='0 3px 12px rgba(0,0,0,0.13)';e.currentTarget.style.borderColor='#aaa'},
+    onMouseLeave:e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.borderColor='#e0e0e0'},
+    onClick:()=>window.open(app.url,'_blank'),
+  },
+    React.createElement('div',{style:{width:compact?45:60,height:compact?45:60,borderRadius:9,
+      background:col,display:'flex',alignItems:'center',justifyContent:'center',
+      color:'#fff',fontWeight:700,fontSize:compact?16:20,flexShrink:0}},ini(app)),
+    React.createElement('div',{style:{textAlign:'center',width:'100%'}},
+      React.createElement('div',{style:{fontWeight:500,fontSize:compact?15:16,color:'#202020',
+        lineHeight:1.3,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}},dName(app)),
+      !compact&&React.createElement('div',{style:{fontSize:15,color:'#8a8886',overflow:'hidden',
+        textOverflow:'ellipsis',whiteSpace:'nowrap'}},catName(cats,app.catId,lang))
+    ),
+    React.createElement('button',{
+      style:{position:'absolute',top:4,right:4,background:'none',border:'none',cursor:'pointer',
+        padding:2,color:isFav?'#c8a800':'#ccc',lineHeight:1},
+      onClick:e=>{e.stopPropagation();onFavToggle(app.id)},
+    },
+      React.createElement('svg',{width:18,height:18,viewBox:'0 0 24 24',
+        fill:isFav?'currentColor':'none',stroke:'currentColor',strokeWidth:2.5},
+        React.createElement('path',{d:'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'}))
+    )
+  );
+}
+
+// ─── App inline editor ──────────────────────────────────────────────────────
+function AppEditor({app,cats,onSave,onCancel,lang}){
+  const t=TR[lang];
+  const[f,sf]=useState({name:'',label:'',url:'',catId:cats[0]?.id||'',color:'#4a4340',desc:'',...app});
+  const upd=(k,v)=>sf(p=>({...p,[k]:v}));
+
+  return React.createElement('div',{style:{padding:21,background:'#faf8f6',
+    borderTop:'2px solid #d0c8c0'}},
+    React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:15,marginBottom:10}},
+      ...[
+        [t.appName,'name'],
+        [t.label,'label'],
+      ].map(([lbl,k])=>React.createElement('div',{key:k},
+        React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:2,fontWeight:500}},lbl),
+        React.createElement('input',{value:f[k]||'',onChange:e=>upd(k,e.target.value),
+          style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18,outline:'none'}})
+      )),
+      React.createElement('div',{key:'url',style:{gridColumn:'1/-1'}},
+        React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:2,fontWeight:500}},t.url),
+        React.createElement('input',{value:f.url||'',onChange:e=>upd('url',e.target.value),
+          placeholder:'https://',
+          style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18,outline:'none'}})
+      ),
+      React.createElement('div',{key:'desc',style:{gridColumn:'1/-1'}},
+        React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:2,fontWeight:500}},t.desc),
+        React.createElement('input',{value:f.desc||'',onChange:e=>upd('desc',e.target.value),
+          style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18,outline:'none'}})
+      ),
+      React.createElement('div',{key:'cat'},
+        React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:2,fontWeight:500}},t.category),
+        React.createElement('select',{value:f.catId,onChange:e=>upd('catId',e.target.value),
+          style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18}},
+          cats.map(c=>React.createElement('option',{key:c.id,value:c.id},c.name))
+        )
+      ),
+      React.createElement('div',{key:'col'},
+        React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:2,fontWeight:500}},t.color),
+        React.createElement('div',{style:{display:'flex',alignItems:'center',gap:12}},
+          React.createElement('input',{type:'color',value:f.color,onChange:e=>upd('color',e.target.value),
+            style:{width:48,height:39,border:'2px solid #d0d0d0',borderRadius:3,cursor:'pointer',padding:2}}),
+          React.createElement('div',{style:{width:39,height:39,borderRadius:6,background:f.color,
+            display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:15}},
+            (f.label||f.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()
+          ),
+          React.createElement('span',{style:{fontSize:16,color:'#8a8886'}},t.preview)
+        )
+      )
+    ),
+    React.createElement('div',{style:{fontSize:16,color:'#8a8886',background:'#fff',border:'2px solid #e8e0d8',
+      borderRadius:4,padding:'9px 15px',marginBottom:10}},
+      '💡 ',t.labelTip),
+    React.createElement('div',{style:{display:'flex',gap:12}},
+      React.createElement('button',{onClick:()=>{if(f.name&&f.url)onSave(f);},
+        style:{padding:'8px 21px',background:'#4a4340',border:'none',borderRadius:3,
+          cursor:'pointer',fontSize:18,color:'#fff',fontWeight:500}},t.save),
+      React.createElement('button',{onClick:onCancel,
+        style:{padding:'8px 18px',background:'transparent',border:'2px solid #d0d0d0',
+          borderRadius:3,cursor:'pointer',fontSize:18}},t.cancel)
+    )
+  );
+}
+
+// ─── Category inline editor ──────────────────────────────────────────────────
+function CatEditor({cat,onSave,onCancel,lang}){
+  const t=TR[lang];
+  const[f,sf]=useState({name:'',nameEl:'',color:'#4a4340',...cat});
+  const upd=(k,v)=>sf(p=>({...p,[k]:v}));
+
+  return React.createElement('div',{style:{padding:'15px 21px',background:'#faf8f6',
+    borderTop:'2px solid #d0c8c0',display:'flex',alignItems:'flex-end',gap:15,flexWrap:'wrap'}},
+    React.createElement('div',{style:{flex:'1 1 200px'}},
+      React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:3,fontWeight:500}},'🇬🇧 '+t.catName),
+      React.createElement('input',{value:f.name,onChange:e=>upd('name',e.target.value),
+        style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18,outline:'none'}})
+    ),
+    React.createElement('div',{style:{flex:'1 1 200px'}},
+      React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:3,fontWeight:500}},'🇬🇷 '+t.catNameEl),
+      React.createElement('input',{value:f.nameEl||'',onChange:e=>upd('nameEl',e.target.value),
+        placeholder:'...',
+        style:{width:'100%',padding:'8px 10px',border:'2px solid #d0d0d0',borderRadius:3,fontSize:18,outline:'none'}})
+    ),
+    React.createElement('div',null,
+      React.createElement('label',{style:{fontSize:16,color:'#605e5c',display:'block',marginBottom:3,fontWeight:500}},t.catColor),
+      React.createElement('div',{style:{display:'flex',alignItems:'center',gap:9}},
+        React.createElement('input',{type:'color',value:f.color,onChange:e=>upd('color',e.target.value),
+          style:{width:48,height:39,border:'2px solid #d0d0d0',borderRadius:3,cursor:'pointer',padding:1}}),
+        React.createElement('div',{style:{width:39,height:39,borderRadius:6,background:f.color,
+          display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:16}},
+          (f.name||'?')[0].toUpperCase()
+        )
+      )
+    ),
+    React.createElement('div',{style:{display:'flex',gap:9,alignSelf:'flex-end',paddingBottom:1}},
+      React.createElement('button',{onClick:()=>{if(f.name)onSave(f);},
+        style:{padding:'8px 21px',background:'#4a4340',border:'none',borderRadius:3,
+          cursor:'pointer',fontSize:18,color:'#fff',fontWeight:500}},t.save),
+      React.createElement('button',{onClick:onCancel,
+        style:{padding:'8px 18px',background:'transparent',border:'2px solid #d0d0d0',
+          borderRadius:3,cursor:'pointer',fontSize:18}},t.cancel)
+    )
+  );
+}
+
+function MainMenu({apps,cats,favIds,onFavToggle,onNav,lang,setLang,username,displayName}){
+  const t=TR[lang];
+  const[selCat,setSel]=useState('__all');
+  const[q,setQ]=useState('');
+  const lastUpd=new Date(Date.now()-2*864e5);
+  const fmt=d=>d.toLocaleDateString(lang==='el'?'el-GR':'en-GB',{day:'2-digit',month:'short',year:'numeric'});
+
+  const favApps=apps.filter(a=>favIds.includes(a.id));
+  const filtered=apps.filter(a=>{
+    const mc=selCat==='__all'||a.catId===selCat;
+    const ms=!q||dName(a).toLowerCase().includes(q.toLowerCase())||catName(cats,a.catId,lang).toLowerCase().includes(q.toLowerCase());
+    return mc&&ms;
+  });
+
+  return React.createElement('div',{style:{display:'flex',flexDirection:'column',height:'100%'}},
+    // header
+    React.createElement('div',{style:{background:'#fff',borderBottom:'2px solid #e0e0e0',
+      padding:'10px 18px',display:'flex',alignItems:'center',gap:15,flexShrink:0}},
+      React.createElement(Logo,{lang}),
+      React.createElement('div',{style:{flex:1}}),
+      React.createElement('div',{style:{display:'flex',alignItems:'center',gap:8,
+        background:'#f3f3f3',border:'2px solid #d0d0d0',borderRadius:3,padding:'4px 10px',width:255}},
+        React.createElement('svg',{width:20,height:20,viewBox:'0 0 24 24',fill:'#8a8886'},
+          React.createElement('path',{d:'M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'})),
+        React.createElement('input',{placeholder:t.search,value:q,onChange:e=>setQ(e.target.value),
+          style:{border:'none',background:'transparent',outline:'none',fontSize:18,width:'100%'}})
+      ),
+      React.createElement(LangToggle,{lang,setLang}),
+      React.createElement('div',{style:{display:'flex',alignItems:'center',gap:6,
+        padding:'4px 10px',background:'#f0ece8',borderRadius:2,fontSize:15,color:'#4a4340'}},
+        React.createElement('span',{style:{fontSize:18}},'👤'),
+        React.createElement('span',{style:{fontWeight:500}},displayName||username)
+      ),
+      ...[['user','★ '+t.favourites],['admin','⚙ '+t.admin]].map(([pg,lbl])=>
+        React.createElement('button',{key:pg,onClick:()=>onNav(pg),
+          style:{padding:'6px 14px',background:'transparent',border:'2px solid #d0d0d0',
+            borderRadius:3,cursor:'pointer',fontSize:18,color:'#202020'},
+          onMouseEnter:e=>e.currentTarget.style.background='#f0f0f0',
+          onMouseLeave:e=>e.currentTarget.style.background='transparent'},lbl)
+      )
+    ),
+    // favs
+    favApps.length>0&&React.createElement('div',{style:{background:'#faf8f6',
+      borderBottom:'2px solid #e8e0d8',padding:'9px 18px'}},
+      React.createElement('div',{style:{fontSize:15,fontWeight:600,color:'#8a7f74',
+        marginBottom:6,textTransform:'uppercase',letterSpacing:'1px'}},'★ '+t.favourites),
+      React.createElement('div',{style:{display:'grid',
+        gridTemplateColumns:'repeat(auto-fill,minmax(102px,1fr))',gap:9}},
+        favApps.map(a=>React.createElement(AppTile,{key:a.id,app:a,cats,isFav:true,onFavToggle,compact:true,lang}))
+      )
+    ),
+    // category tabs
+    React.createElement('div',{style:{display:'flex',borderBottom:'2px solid #e0e0e0',
+      background:'#fff',flexShrink:0,overflowX:'auto'}},
+      [['__all',t.all],...cats.map(c=>[c.id,lang==='el'&&c.nameEl?c.nameEl:c.name])].map(([id,name])=>
+        React.createElement('button',{key:id,onClick:()=>setSel(id),
+          style:{padding:'8px 16px',background:'none',border:'none',cursor:'pointer',fontSize:16,
+            color:selCat===id?'#4a4340':'#605e5c',fontWeight:selCat===id?600:400,
+            whiteSpace:'nowrap',borderBottom:selCat===id?'3px solid #8a7f74':'3px solid transparent'}},
+          name)
+      )
+    ),
+    // grid
+    React.createElement('div',{style:{flex:1,overflow:'auto',padding:16}},
+      filtered.length===0
+        ?React.createElement('div',{style:{textAlign:'center',color:'#8a8886',padding:54}},t.noApps)
+        :React.createElement('div',{style:{display:'grid',
+          gridTemplateColumns:'repeat(auto-fill,minmax(135px,1fr))',gap:12}},
+          filtered.map(a=>React.createElement(AppTile,{key:a.id,app:a,cats,
+            isFav:favIds.includes(a.id),onFavToggle,lang}))
+        )
+    ),
+    // footer
+    React.createElement('div',{style:{background:'#f3f0ec',borderTop:'2px solid #e0d8d0',
+      padding:'6px 18px',display:'flex',alignItems:'center',gap:15,flexShrink:0}},
+      React.createElement('img',{src:'data:image/jpeg;base64,'+LOGO,style:{height:20,opacity:0.45},alt:''}),
+      React.createElement('span',{style:{fontSize:15,color:'#8a8886'}},t.lastUpdated+' '+fmt(lastUpd)),
+      React.createElement('div',{style:{flex:1}}),
+      React.createElement('span',{style:{fontSize:15,color:'#8a8886'}},'v2.5 · '+apps.length+' '+t.apps)
+    )
+  );
+}
+
+// ─── FAVOURITES PAGE ─────────────────────────────────────────────────────────
+function FavsPage({apps,cats,favIds,onFavToggle,onBack,lang,setLang}){
+  const t=TR[lang];
+  const favApps=favIds.map(id=>apps.find(a=>a.id===id)).filter(Boolean);
+  const nonFavs=apps.filter(a=>!favIds.includes(a.id));
+  const row=(app,showRemove)=>React.createElement('div',{key:app.id,
+    style:{display:'flex',alignItems:'center',gap:12,background:'#fff',
+      border:'2px solid #e0e0e0',borderRadius:4,padding:'8px 15px'}},
+    React.createElement('div',{style:{width:36,height:36,borderRadius:6,background:app.color||catColor(cats,app.catId),
+      display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:15,flexShrink:0}},ini(app)),
+    React.createElement('div',{style:{flex:1,minWidth:0}},
+      React.createElement('div',{style:{fontWeight:500,fontSize:18}},dName(app)),
+      React.createElement('div',{style:{fontSize:15,color:'#8a8886'}},catName(cats,app.catId,lang))
+    ),
+    React.createElement('button',{onClick:()=>onFavToggle(app.id),
+      style:{background:'none',border:'none',cursor:'pointer',
+        color:showRemove?'#c42b1c':'#8a7f74',fontSize:16,padding:'3px 9px',borderRadius:3},
+      onMouseEnter:e=>e.currentTarget.style.background=showRemove?'#fde7e9':'#f0ece8',
+      onMouseLeave:e=>e.currentTarget.style.background='none'},
+      showRemove?t.remove:'★ '+t.add)
+  );
+
+  return React.createElement('div',{style:{display:'flex',flexDirection:'column',height:'100%'}},
+    React.createElement('div',{style:{background:'#fff',borderBottom:'2px solid #e0e0e0',
+      padding:'10px 18px',display:'flex',alignItems:'center',gap:15,flexShrink:0}},
+      React.createElement('button',{onClick:onBack,style:{display:'flex',alignItems:'center',gap:6,
+        padding:'6px 12px',background:'transparent',border:'none',cursor:'pointer',fontSize:18,color:'#8a7f74'}},
+        '← '+t.back),
+      React.createElement('span',{style:{fontWeight:600,fontSize:20,color:'#4a4340'}},t.myFavs),
+      React.createElement('div',{style:{flex:1}}),
+      React.createElement(LangToggle,{lang,setLang}),
+      React.createElement(Logo,{lang})
+    ),
+    React.createElement('div',{style:{flex:1,overflow:'auto',padding:21,display:'grid',
+      gridTemplateColumns:'1fr 1fr',gap:21,alignContent:'start'}},
+      React.createElement('div',null,
+        React.createElement('div',{style:{fontWeight:600,fontSize:16,color:'#8a7f74',marginBottom:8,
+          textTransform:'uppercase',letterSpacing:'1px'}},t.pinned+' ('+favApps.length+')'),
+        favApps.length===0
+          ?React.createElement('div',{style:{border:'3px dashed #e0d8d0',borderRadius:6,padding:30,
+              textAlign:'center',color:'#8a8886',fontSize:18}},'—')
+          :React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:8}},
+              favApps.map(a=>row(a,true)))
+      ),
+      React.createElement('div',null,
+        React.createElement('div',{style:{fontWeight:600,fontSize:16,color:'#8a7f74',marginBottom:8,
+          textTransform:'uppercase',letterSpacing:'1px'}},t.available),
+        React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:8,maxHeight:540,overflowY:'auto'}},
+          nonFavs.map(a=>row(a,false)))
+      )
+    )
+  );
+}
+
+// ─── ADMIN PAGE ───────────────────────────────────────────────────────────────
+function AdminPage({apps,setApps,cats,setCats,onBack,lang,setLang,syncing=false}){
+  const t=TR[lang];
+  const[tab,setTab]=useState('apps'); // 'apps' | 'cats'
+  const[editingApp,setEditingApp]=useState(null); // null | 'new' | id
+  const[editingCat,setEditingCat]=useState(null); // null | 'new' | id
+  const[saved,setSaved]=useState(false);
+  const[dragIdx,setDragIdx]=useState(null);
+  const[overIdx,setOverIdx]=useState(null);
+
+  const flash=()=>{setSaved(true);setTimeout(()=>setSaved(false),2000);};
+
+  // ── App actions
+  const saveApp=f=>{
+    if(editingApp==='new') setApps(p=>[...p,{...f,id:Date.now()}]);
+    else setApps(p=>p.map(a=>a.id===editingApp?{...a,...f}:a));
+    setEditingApp(null);flash();
+  };
+  const delApp=id=>{setApps(p=>p.filter(a=>a.id!==id));if(editingApp===id)setEditingApp(null);};
+
+  // ── Cat actions
+  const saveCat=f=>{
+    if(editingCat==='new'){
+      const id='cat_'+Date.now();
+      setCats(p=>[...p,{...f,id}]);
+    } else {
+      setCats(p=>p.map(c=>c.id===editingCat?{...c,...f}:c));
+    }
+    setEditingCat(null);flash();
+  };
+  const delCat=id=>{
+    // move apps in this cat to 'Other'
+    setApps(p=>p.map(a=>a.catId===id?{...a,catId:'Other'}:a));
+    setCats(p=>p.filter(c=>c.id!==id));
+    if(editingCat===id)setEditingCat(null);
+    flash();
+  };
+
+  // ── Cat drag-reorder
+  const onDragStart=i=>setDragIdx(i);
+  const onDragOver=(e,i)=>{e.preventDefault();setOverIdx(i);};
+  const onDrop=()=>{
+    if(dragIdx===null||overIdx===null||dragIdx===overIdx){setDragIdx(null);setOverIdx(null);return;}
+    setCats(p=>{const a=[...p];const[item]=a.splice(dragIdx,1);a.splice(overIdx,0,item);return a;});
+    setDragIdx(null);setOverIdx(null);flash();
+  };
+
+  const TabBtn=({id,label})=>React.createElement('button',{onClick:()=>setTab(id),
+    style:{padding:'9px 24px',background:'none',border:'none',cursor:'pointer',fontSize:18,
+      color:tab===id?'#4a4340':'#605e5c',fontWeight:tab===id?600:400,
+      borderBottom:tab===id?'3px solid #8a7f74':'3px solid transparent'}},label);
+
+  return React.createElement('div',{style:{display:'flex',flexDirection:'column',height:'100%'}},
+    // header
+    React.createElement('div',{style:{background:'#fff',borderBottom:'2px solid #e0e0e0',
+      padding:'10px 18px',display:'flex',alignItems:'center',gap:15,flexShrink:0,flexWrap:'wrap'}},
+      React.createElement('button',{onClick:onBack,style:{display:'flex',alignItems:'center',gap:6,
+        padding:'6px 12px',background:'transparent',border:'none',cursor:'pointer',fontSize:18,color:'#8a7f74'}},
+        '← '+t.back),
+      React.createElement('span',{style:{fontWeight:600,fontSize:20,color:'#4a4340'}},'⚙ '+t.adminApps),
+      React.createElement('div',{style:{display:'flex',borderBottom:'none',gap:0,marginLeft:8}},
+        React.createElement(TabBtn,{id:'apps',label:t.adminApps}),
+        React.createElement(TabBtn,{id:'cats',label:t.adminCats})
+      ),
+      React.createElement('div',{style:{flex:1}}),
+      saved&&React.createElement('span',{style:{fontSize:18,color:'#107c10',fontWeight:500}},t.saved),
+      syncing&&React.createElement('span',{style:{fontSize:15,color:'#8a7f74',display:'flex',alignItems:'center',gap:6}},
+        '⟳ '+(lang==='el'?'Αποθήκευση...':'Saving...')),
+      React.createElement(LangToggle,{lang,setLang}),
+      tab==='apps'
+        ?React.createElement('button',{onClick:()=>{setEditingApp('new');setEditingCat(null);},
+            style:{padding:'6px 16px',background:'#4a4340',border:'none',borderRadius:3,
+              cursor:'pointer',fontSize:18,color:'#fff',fontWeight:500}},t.addApp)
+        :React.createElement('button',{onClick:()=>{setEditingCat('new');setEditingApp(null);},
+            style:{padding:'6px 16px',background:'#4a4340',border:'none',borderRadius:3,
+              cursor:'pointer',fontSize:18,color:'#fff',fontWeight:500}},t.addCat),
+      React.createElement(Logo,{lang})
+    ),
+
+    // body
+    React.createElement('div',{style:{flex:1,overflow:'auto',padding:18}},
+
+      // ── APPS TAB ────────────────────────────────────────────────────────
+      tab==='apps'&&React.createElement('div',null,
+        editingApp==='new'&&React.createElement('div',{style:{marginBottom:14,border:'2px solid #8a7f74',borderRadius:6,overflow:'hidden'}},
+          React.createElement('div',{style:{background:'#4a4340',color:'#fff',fontSize:18,fontWeight:600,padding:'10px 18px'}},t.newApp),
+          React.createElement(AppEditor,{app:{},cats,onSave:saveApp,onCancel:()=>setEditingApp(null),lang})
+        ),
+
+        cats.map(cat=>{
+          const catApps=apps.filter(a=>a.catId===cat.id);
+          if(catApps.length===0)return null;
+          return React.createElement('div',{key:cat.id,style:{marginBottom:16}},
+            React.createElement('div',{style:{display:'flex',alignItems:'center',gap:12,marginBottom:5,
+              paddingBottom:4,borderBottom:'2px solid #e8e0d8'}},
+              React.createElement(Swatch,{color:cat.color}),
+              React.createElement('span',{style:{fontWeight:600,fontSize:18}},lang==='el'&&cat.nameEl?cat.nameEl:cat.name),
+              React.createElement('span',{style:{fontSize:16,color:'#8a8886'}},'('+catApps.length+')')
+            ),
+            catApps.map(app=>React.createElement('div',{key:app.id,style:{marginBottom:3}},
+              React.createElement('div',{style:{display:'flex',alignItems:'center',gap:15,
+                background:editingApp===app.id?'#faf8f6':'#fff',
+                border:editingApp===app.id?'2px solid #8a7f74':'2px solid #e0e0e0',
+                borderRadius:editingApp===app.id?'6px 6px 0 0':4,
+                borderBottom:editingApp===app.id?'none':'2px solid #e0e0e0',
+                padding:'10px 15px'}},
+                React.createElement('div',{style:{width:39,height:39,borderRadius:6,background:app.color||cat.color,
+                  display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:15,flexShrink:0}},ini(app)),
+                React.createElement('div',{style:{flex:1,minWidth:0}},
+                  React.createElement('div',{style:{fontWeight:500,fontSize:18,display:'flex',alignItems:'center',gap:9}},
+                    dName(app),
+                    app.label&&React.createElement('span',{style:{fontSize:15,color:'#8a8886',fontWeight:400}},'['+app.name+']')
+                  ),
+                  React.createElement('div',{style:{fontSize:15,color:'#8a8886',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}},app.url)
+                ),
+                React.createElement('span',{style:{fontSize:16,color:'#8a8886',width:105,flexShrink:0,
+                  overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}},app.desc),
+                React.createElement('div',{style:{display:'flex',gap:6}},
+                  React.createElement('button',{
+                    onClick:()=>editingApp===app.id?setEditingApp(null):setEditingApp(app.id),
+                    style:{padding:'4px 12px',background:editingApp===app.id?'#e8e0d8':'transparent',
+                      border:'2px solid #d0d0d0',borderRadius:3,cursor:'pointer',fontSize:16}},
+                    editingApp===app.id?t.cancel:t.editApp),
+                  React.createElement('button',{onClick:()=>delApp(app.id),
+                    style:{padding:'4px 12px',background:'transparent',border:'2px solid #fde7e9',
+                      borderRadius:3,cursor:'pointer',fontSize:16,color:'#c42b1c'},
+                    onMouseEnter:e=>e.currentTarget.style.background='#fde7e9',
+                    onMouseLeave:e=>e.currentTarget.style.background='transparent'},t.delete)
+                )
+              ),
+              editingApp===app.id&&React.createElement('div',{style:{border:'2px solid #8a7f74',
+                borderTop:'none',borderRadius:'0 0 6px 6px',overflow:'hidden'}},
+                React.createElement(AppEditor,{app,cats,onSave:saveApp,onCancel:()=>setEditingApp(null),lang})
+              )
+            ))
+          );
+        })
+      ),
+
+      // ── CATS TAB ────────────────────────────────────────────────────────
+      tab==='cats'&&React.createElement('div',null,
+        // new cat form
+        editingCat==='new'&&React.createElement('div',{style:{marginBottom:12,border:'2px solid #8a7f74',borderRadius:6,overflow:'hidden'}},
+          React.createElement('div',{style:{background:'#4a4340',color:'#fff',fontSize:18,fontWeight:600,padding:'10px 18px'}},t.newCat),
+          React.createElement(CatEditor,{cat:{},onSave:saveCat,onCancel:()=>setEditingCat(null),lang})
+        ),
+
+        // drag hint
+        React.createElement('div',{style:{fontSize:16,color:'#8a8886',marginBottom:8,display:'flex',alignItems:'center',gap:8}},
+          React.createElement('span',null,'⇅'),t.reorder),
+
+        // category rows
+        cats.map((cat,i)=>{
+          const count=apps.filter(a=>a.catId===cat.id).length;
+          const isDragging=dragIdx===i;
+          const isOver=overIdx===i;
+          return React.createElement('div',{key:cat.id,style:{marginBottom:3}},
+            React.createElement('div',{
+              draggable:true,
+              onDragStart:()=>onDragStart(i),
+              onDragOver:e=>onDragOver(e,i),
+              onDrop,
+              onDragEnd:()=>{setDragIdx(null);setOverIdx(null);},
+              style:{display:'flex',alignItems:'center',gap:15,
+                background:editingCat===cat.id?'#faf8f6':isDragging?'#e8e0d8':isOver?'#f0ece8':'#fff',
+                border:editingCat===cat.id?'2px solid #8a7f74':isOver?'3px dashed #8a7f74':'2px solid #e0e0e0',
+                borderRadius:editingCat===cat.id?'6px 6px 0 0':4,
+                borderBottom:editingCat===cat.id?'none':undefined,
+                padding:'12px 18px',cursor:'grab',transition:'background 0.1s',
+                opacity:isDragging?0.5:1}},
+              React.createElement('span',{style:{fontSize:24,color:'#bbb',cursor:'grab'}},'⠿'),
+              React.createElement('div',{style:{width:42,height:42,borderRadius:6,background:cat.color,
+                display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',
+                fontWeight:700,fontSize:18,flexShrink:0}},cat.name[0].toUpperCase()),
+              React.createElement('div',{style:{flex:1}},
+                React.createElement('div',{style:{fontWeight:600,fontSize:20}},''+cat.name),
+                React.createElement('div',{style:{fontSize:16,color:'#8a8886'}},t.catUsed+' '+count+' '+t.catApps)
+              ),
+              React.createElement(Swatch,{color:cat.color,size:24}),
+              React.createElement('div',{style:{display:'flex',gap:6}},
+                React.createElement('button',{
+                  onClick:()=>editingCat===cat.id?setEditingCat(null):setEditingCat(cat.id),
+                  style:{padding:'4px 12px',background:editingCat===cat.id?'#e8e0d8':'transparent',
+                    border:'2px solid #d0d0d0',borderRadius:3,cursor:'pointer',fontSize:16}},
+                  editingCat===cat.id?t.cancel:t.editApp),
+                cat.id!=='Other'&&React.createElement('button',{onClick:()=>{if(window.confirm(t.confirmDelCat))delCat(cat.id);},
+                  style:{padding:'4px 12px',background:'transparent',border:'2px solid #fde7e9',
+                    borderRadius:3,cursor:'pointer',fontSize:16,color:'#c42b1c'},
+                  onMouseEnter:e=>e.currentTarget.style.background='#fde7e9',
+                  onMouseLeave:e=>e.currentTarget.style.background='transparent'},t.delete)
+              )
+            ),
+            editingCat===cat.id&&React.createElement('div',{style:{border:'2px solid #8a7f74',
+              borderTop:'none',borderRadius:'0 0 6px 6px',overflow:'hidden'}},
+              React.createElement(CatEditor,{cat,onSave:saveCat,onCancel:()=>setEditingCat(null),lang})
+            )
+          );
+        })
+      )
+    ),
+
+    // footer
+    React.createElement('div',{style:{background:'#f3f0ec',borderTop:'2px solid #e0d8d0',
+      padding:'6px 18px',display:'flex',alignItems:'center',gap:12,flexShrink:0}},
+      React.createElement('img',{src:'data:image/jpeg;base64,'+LOGO,style:{height:20,opacity:0.4},alt:''}),
+      React.createElement('span',{style:{fontSize:15,color:'#8a8886'}},t.changesNote),
+      React.createElement('div',{style:{flex:1}}),
+      React.createElement('span',{style:{fontSize:15,color:'#8a8886'}},t.restricted)
+    )
+  );
+}
+
+// ─── ROOT ────────────────────────────────────────────────────────────────────
+
+// ─── GitHub Storage ──────────────────────────────────────────────────────────
+// CONFIGURE THESE before deploying to GitHub Pages:
+const GH = {
+  owner:  'AtheneosInsurance',       // GitHub username
+  repo:   'atheneospcmenu',         // repository name
+  branch: 'main',
+  token:  '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',         // Personal Access Token (repo scope)
+  shared: 'data/shared.json',       // apps + categories
+  users:  'data/users.json',        // per-user favourites + lang
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
+const GH_BASE = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents`;
+const GH_HDR  = () => ({
+  'Authorization': `token ${GH.token}`,
+  'Accept':        'application/vnd.github.v3+json',
+  'Content-Type':  'application/json',
+});
+
+// In-memory SHA cache (GitHub requires SHA for updates)
+const _sha = {};
+
+async function ghRead(file) {
+  try {
+    const r = await fetch(`${GH_BASE}/${file}?ref=${GH.branch}&t=${Date.now()}`, { headers: GH_HDR() });
+    if (!r.ok) return { data: null, sha: null };
+    const j = await r.json();
+    const data = JSON.parse(atob(j.content.replace(/\s/g, '')));
+    return { data, sha: j.sha };
+  } catch(e) { return { data: null, sha: null }; }
+}
+
+async function ghWrite(file, data, sha) {
+  const encode = d => btoa(unescape(encodeURIComponent(JSON.stringify(d, null, 2))));
+  const attempt = async (currentSha) => {
+    const body = {
+      message: `portal update ${new Date().toISOString()}`,
+      content: encode(data),
+      branch:  GH.branch,
+    };
+    if (currentSha) body.sha = currentSha;
+    const r = await fetch(`${GH_BASE}/${file}`, {
+      method: 'PUT', headers: GH_HDR(), body: JSON.stringify(body)
+    });
+    if (r.status === 409 || r.status === 422) {
+      // Stale SHA — fetch the latest and retry once
+      const fresh = await ghRead(file);
+      if (fresh.sha && fresh.sha !== currentSha) {
+        return attempt(fresh.sha);
+      }
+    }
+    if (!r.ok) { console.warn('ghWrite failed', r.status); return currentSha; }
+    const j = await r.json();
+    return j.content?.sha || currentSha;
+  };
+  try { return await attempt(sha); }
+  catch(e) { console.warn('ghWrite error', e); return sha; }
+}
+
+// ─── Login Screen ─────────────────────────────────────────────────────────────
+function LoginScreen({onLogin, lang, setLang}) {
+  const t = TR[lang];
+  const[name, setName] = useState('');
+  const[err, setErr]   = useState(false);
+
+  const submit = () => {
+    const v = name.trim();
+    if (!v) { setErr(true); return; }
+    const uname = v.toLowerCase().replace(/\s+/g, '.').replace(/[^a-z0-9.]/g, '');
+    localStorage.setItem('portal_displayName', v);
+    localStorage.setItem('portal_username',    uname);
+    onLogin(v, uname);
+  };
+
+  return React.createElement('div', {
+    style: { height:900, display:'flex', flexDirection:'column', alignItems:'center',
+      justifyContent:'center', background:'#f3f0ec', border:'2px solid #c8c0b8',
+      borderRadius:3, boxShadow:'0 6px 24px rgba(0,0,0,0.14)', position:'relative' }
+  },
+    React.createElement('div', { style:{ position:'absolute', top:18, right:18 } },
+      React.createElement(LangToggle, { lang, setLang })
+    ),
+    React.createElement('img', {
+      src: 'data:image/jpeg;base64,' + LOGO,
+      style: { height:72, marginBottom:24, objectFit:'contain' }, alt:'Atheneos'
+    }),
+    React.createElement('div', {
+      style: { fontSize:24, fontWeight:600, color:'#4a4340', marginBottom:6 }
+    }, lang==='el' ? 'Πύλη Εφαρμογών' : 'Application Portal'),
+    React.createElement('div', {
+      style: { fontSize:16, color:'#8a7f74', marginBottom:6 }
+    }, lang==='el' ? 'Εισαγάγετε το όνομά σας' : 'Enter your name to continue'),
+    React.createElement('div', {
+      style: { fontSize:13, color:'#aaa', marginBottom:28 }
+    }, lang==='el' ? '(θα αποθηκευτεί τοπικά — δεν ξαναρωτάμε)' : '(saved locally — only asked once)'),
+    React.createElement('div', { style:{ display:'flex', gap:9 } },
+      React.createElement('input', {
+        value: name,
+        onChange: e => { setName(e.target.value); setErr(false); },
+        onKeyDown: e => e.key === 'Enter' && submit(),
+        placeholder: lang==='el' ? 'π.χ. Μαρία Παπαδοπούλου' : 'e.g. Maria Papadopoulou',
+        autoFocus: true,
+        style: { padding:'10px 15px', border:'2px solid ' + (err ? '#c42b1c' : '#d0d0d0'),
+          borderRadius:3, fontSize:18, outline:'none', width:280, background:'#fff' }
+      }),
+      React.createElement('button', {
+        onClick: submit,
+        style: { padding:'10px 21px', background:'#4a4340', border:'none',
+          borderRadius:3, cursor:'pointer', fontSize:18, color:'#fff', fontWeight:600 }
+      }, lang==='el' ? 'Είσοδος' : 'Enter')
+    ),
+    err && React.createElement('div', {
+      style: { marginTop:9, fontSize:15, color:'#c42b1c' }
+    }, lang==='el' ? 'Παρακαλώ εισαγάγετε το όνομά σας' : 'Please enter your name')
+  );
+}
+
+// ─── App ──────────────────────────────────────────────────────────────────────
+function App() {
+  const[apps,    setApps]    = useState(INIT_APPS);
+  const[cats,    setCats]    = useState(INIT_CATS);
+  const[favIds,  setFavIds]  = useState([]);
+  const[page,    setPage]    = useState('menu');
+  const[lang,    setLang]    = useState('en');
+  const[username,setUsername]= useState('');
+  const[displayName,setDisplayName] = useState('');
+  const[loaded,  setLoaded]  = useState(false);
+  const[syncing, setSyncing] = useState(false);
+  const[syncErr, setSyncErr] = useState(false);
+
+  const saveTimer     = useRef(null);
+  const userSaveTimer = useRef(null);
+
+  // ── On mount: restore identity from localStorage ──────────────────────────
+  useEffect(() => {
+    const dn = localStorage.getItem('portal_displayName') || '';
+    const un = localStorage.getItem('portal_username')    || '';
+    if (dn && un) { setDisplayName(dn); setUsername(un); }
+    // Load lang preference from localStorage too
+    const savedLang = localStorage.getItem('portal_lang');
+    if (savedLang) setLang(savedLang);
+  }, []);
+
+  // ── Load shared data (apps + cats) from GitHub ────────────────────────────
+  useEffect(() => {
+    ghRead(GH.shared).then(({ data, sha }) => {
+      _sha.shared = sha;  // always store SHA even if null
+      if (data?.apps?.length) setApps(data.apps);
+      if (data?.cats?.length) setCats(data.cats);
+      setLoaded(true);
+    }).catch(() => setLoaded(true));
+  }, []);
+
+  // ── Load per-user prefs from GitHub when username is known ────────────────
+  useEffect(() => {
+    if (!username) return;
+    ghRead(GH.users).then(({ data, sha }) => {
+      if (sha) _sha.users = sha;
+      const me = data?.[username];
+      if (me?.favIds) setFavIds(me.favIds);
+      if (me?.lang)   { setLang(me.lang); localStorage.setItem('portal_lang', me.lang); }
+    });
+  }, [username]);
+
+  // ── Save shared (debounced 800ms) ─────────────────────────────────────────
+  const saveShared = (newApps, newCats) => {
+    clearTimeout(saveTimer.current);
+    setSyncing(true);
+    saveTimer.current = setTimeout(async () => {
+      // Always fetch latest SHA before writing to avoid conflicts
+      const { sha } = await ghRead(GH.shared);
+      if (sha) _sha.shared = sha;
+      _sha.shared = await ghWrite(GH.shared, { apps: newApps, cats: newCats, updatedAt: new Date().toISOString() }, _sha.shared);
+      setSyncing(false);
+    }, 800);
+  };
+
+  // ── Save user prefs (debounced 800ms) ─────────────────────────────────────
+  const saveUser = (newFavIds, newLang) => {
+    if (!username) return;
+    clearTimeout(userSaveTimer.current);
+    userSaveTimer.current = setTimeout(async () => {
+      const { data, sha } = await ghRead(GH.users);
+      if (sha) _sha.users = sha;
+      const all = data || {};
+      all[username] = { favIds: newFavIds, lang: newLang, displayName, lastSeen: new Date().toISOString() };
+      _sha.users = await ghWrite(GH.users, all, _sha.users);
+    }, 800);
+  };
+
+  const setAppsAndSave = v => { const n = typeof v==='function'?v(apps):v; setApps(n); saveShared(n, cats); };
+  const setCatsAndSave = v => { const n = typeof v==='function'?v(cats):v; setCats(n); saveShared(apps, n); };
+  const setLangAndSave = v => { setLang(v); localStorage.setItem('portal_lang', v); saveUser(favIds, v); };
+  const toggle = id => {
+    const n = favIds.includes(id) ? favIds.filter(x=>x!==id) : [...favIds, id];
+    setFavIds(n); saveUser(n, lang);
+  };
+  const handleLogin = (dn, un) => { setDisplayName(dn); setUsername(un); };
+
+  // ── Loading / login states ────────────────────────────────────────────────
+  const spinner = msg => React.createElement('div', {
+    style: { height:900, display:'flex', flexDirection:'column', alignItems:'center',
+      justifyContent:'center', background:'#f3f0ec', border:'2px solid #c8c0b8',
+      borderRadius:3, boxShadow:'0 6px 24px rgba(0,0,0,0.14)', gap:18 }
+  },
+    React.createElement('img', { src:'data:image/jpeg;base64,'+LOGO, style:{ height:54, opacity:0.5 }, alt:'' }),
+    React.createElement('div', { style:{ fontSize:18, color:'#8a7f74' } }, msg)
+  );
+
+  if (!loaded) return spinner(lang==='el' ? 'Φόρτωση...' : 'Loading...');
+  if (!username) return React.createElement(LoginScreen, { onLogin:handleLogin, lang, setLang });
+
+  return React.createElement('div', {
+    style: { height:900, display:'flex', flexDirection:'column', border:'2px solid #c8c0b8',
+      borderRadius:3, overflow:'hidden', boxShadow:'0 6px 24px rgba(0,0,0,0.14)', background:'#f3f3f3' }
+  },
+    page==='menu'  && React.createElement(MainMenu,   { apps, cats, favIds, onFavToggle:toggle, onNav:setPage, lang, setLang:setLangAndSave, username, displayName }),
+    page==='user'  && React.createElement(FavsPage,   { apps, cats, favIds, onFavToggle:toggle, onBack:()=>setPage('menu'), lang, setLang:setLangAndSave }),
+    page==='admin' && React.createElement(AdminPage,  { apps, setApps:setAppsAndSave, cats, setCats:setCatsAndSave, onBack:()=>setPage('menu'), lang, setLang:setLangAndSave, syncing })
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+</script></body></html>
