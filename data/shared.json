@@ -29,7 +29,7 @@
     },
     {
       "id": 5,
-      "name": "ServiceNow",
+      "name": "ServiceNow TEST",
       "label": "",
       "url": "https://itsm.atheneos.local",
       "catId": "IT Tools",
@@ -144,5 +144,5 @@
       "color": "#8a7f74"
     }
   ],
-  "updatedAt": "2026-05-20T14:57:24.099Z"
+  "updatedAt": "2026-05-20T14:57:47.765Z"
 }
