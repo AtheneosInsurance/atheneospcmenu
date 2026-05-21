@@ -1,8 +1,10 @@
 {
   "pericles": {
-    "favIds": [],
+    "favIds": [
+      3
+    ],
     "lang": "el",
     "displayName": "Pericles",
-    "lastSeen": "2026-05-21T09:01:25.220Z"
+    "lastSeen": "2026-05-21T09:01:27.107Z"
   }
 }
