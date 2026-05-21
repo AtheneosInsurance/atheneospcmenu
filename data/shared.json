@@ -1,1 +1,143 @@
-{"apps":null,"cats":null}
+{
+  "apps": [
+    {
+      "id": 1,
+      "name": "SAP ERP",
+      "url": "https://erp.atheneos.local",
+      "catId": "ERP",
+      "color": "#107c10",
+      "desc": ""
+    },
+    {
+      "id": 2,
+      "name": "Salesforce",
+      "url": "https://crm.atheneos.local",
+      "catId": "CRM",
+      "color": "#0078d4",
+      "desc": ""
+    },
+    {
+      "id": 3,
+      "name": "Workday",
+      "url": "https://hr.atheneos.local",
+      "catId": "HR",
+      "color": "#8764b8",
+      "desc": ""
+    },
+    {
+      "id": 4,
+      "name": "Power BI",
+      "url": "https://bi.atheneos.local",
+      "catId": "Reporting",
+      "color": "#00b7c3",
+      "desc": ""
+    },
+    {
+      "id": 5,
+      "name": "ServiceNow",
+      "url": "https://itsm.atheneos.local",
+      "catId": "IT Tools",
+      "color": "#5c2d91",
+      "desc": ""
+    },
+    {
+      "id": 6,
+      "name": "Teams",
+      "url": "https://teams.microsoft.com",
+      "catId": "Comm",
+      "color": "#464775",
+      "desc": ""
+    },
+    {
+      "id": 7,
+      "name": "SharePoint",
+      "url": "https://sp.atheneos.local",
+      "catId": "IT Tools",
+      "color": "#036c70",
+      "desc": ""
+    },
+    {
+      "id": 8,
+      "name": "Concur",
+      "url": "https://concur.atheneos.local",
+      "catId": "Finance",
+      "color": "#c43501",
+      "desc": ""
+    },
+    {
+      "id": 9,
+      "name": "Claims Portal",
+      "url": "https://claims.atheneos.local",
+      "catId": "Other",
+      "color": "#8a7f74",
+      "desc": ""
+    },
+    {
+      "id": 10,
+      "name": "HR Portal",
+      "url": "https://hrportal.atheneos.local",
+      "catId": "HR",
+      "color": "#8764b8",
+      "desc": ""
+    },
+    {
+      "id": 11,
+      "name": "Finance Reports",
+      "url": "https://finance.atheneos.local",
+      "catId": "Finance",
+      "color": "#c43501",
+      "desc": ""
+    },
+    {
+      "id": 12,
+      "name": "Outlook Web",
+      "url": "https://mail.atheneos.local",
+      "catId": "Comm",
+      "color": "#0078d4",
+      "desc": ""
+    }
+  ],
+  "cats": [
+    {
+      "id": "ERP",
+      "name": "ERP",
+      "color": "#107c10"
+    },
+    {
+      "id": "CRM",
+      "name": "CRM",
+      "color": "#0078d4"
+    },
+    {
+      "id": "HR",
+      "name": "Ανθρώπικο Δυναμικό",
+      "color": "#8764b8"
+    },
+    {
+      "id": "Finance",
+      "name": "Finance",
+      "color": "#c43501"
+    },
+    {
+      "id": "IT Tools",
+      "name": "IT Tools",
+      "color": "#5c2d91"
+    },
+    {
+      "id": "Reporting",
+      "name": "Reporting",
+      "color": "#00b7c3"
+    },
+    {
+      "id": "Comm",
+      "name": "Communication",
+      "color": "#464775"
+    },
+    {
+      "id": "Other",
+      "name": "Other",
+      "color": "#8a7f74"
+    }
+  ],
+  "updatedAt": "2026-05-21T09:22:52.479Z"
+}
